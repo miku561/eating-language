@@ -8,6 +8,8 @@ Vue.config.productionTip = false
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$axios = axios
 
+require('./mock.js')
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
