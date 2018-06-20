@@ -6,11 +6,11 @@
     <div class="form-part">
       <div class="form-group">
         <i class="icon icon-user"></i>
-        <input type="text" placeholder="用户名" @keyup="showTest" v-model="loginData.username">
+        <input type="text" placeholder="用户名" @blur="checkInp" v-model="loginData.username">
       </div>
       <div class="form-group">
         <i class="icon icon-pwd"></i>
-        <input type="password" placeholder="password" v-model="loginData.password">
+        <input type="password" placeholder="password" @blur="checkPwd" v-model="loginData.password">
       </div>
       <div class="form-group">
         <button class="submit-btn" @click="login">登 录</button>
@@ -45,11 +45,21 @@ export default{
         }
       }).then((res) => {
         if (JSON.parse(res.data.success)) {
-          alert('跳转首页')
+          this.$router.push({
+            path: './index'
+          })
         }
       })
     },
-    showTest () {
+    checkInp () {
+      if (this.loginData.username.length < 5) {
+        console.log('请输入正确的用户名')
+      }
+    },
+    checkPwd () {
+      if (this.loginData.password.length < 8) {
+        console.log('请输入正确的密码')
+      }
     }
   }
 }
