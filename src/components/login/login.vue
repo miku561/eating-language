@@ -6,11 +6,13 @@
     <div class="form-part">
       <div class="form-group">
         <i class="icon icon-user"></i>
-        <input type="text" placeholder="用户名" @blur="checkInp" v-model="loginData.username">
+        <input type="text" placeholder="用户名" @blur="checkInp" v-model="loginData.username" @focus="clearInp('isRightUser')">
+        <span v-if="isRightUser" class="red">请输入正确的用户名</span>
       </div>
       <div class="form-group">
         <i class="icon icon-pwd"></i>
-        <input type="password" placeholder="password" @blur="checkPwd" v-model="loginData.password">
+        <input type="password" placeholder="password" @blur="checkPwd" v-model="loginData.password" @focus="clearInp('isRightPwd')">
+        <span v-if="isRightPwd" class="red">请输入正确的密码</span>
       </div>
       <div class="form-group">
         <button class="submit-btn" @click="login">登 录</button>
@@ -24,9 +26,12 @@
 </template>
 
 <script >
+import util from 'static/tool'
 export default{
   data () {
     return {
+      isRightUser: false,
+      isRightPwd: false,
       loginData: {
         username: '',
         password: ''
@@ -45,20 +50,25 @@ export default{
         }
       }).then((res) => {
         if (JSON.parse(res.data.success)) {
+          util.setCookie('username', this.loginData.username, 7)
+          util.setCookie('password', this.loginData.password, 7)
           this.$router.push({
             path: './index'
           })
         }
       })
     },
+    clearInp (value) {
+      this[value] = false
+    },
     checkInp () {
       if (this.loginData.username.length < 5) {
-        console.log('请输入正确的用户名')
+        this.isRightUser = true
       }
     },
     checkPwd () {
       if (this.loginData.password.length < 8) {
-        console.log('请输入正确的密码')
+        this.isRightPwd = true
       }
     }
   }
@@ -66,5 +76,7 @@ export default{
 </script>
 
 <style scoped lang="scss">
-
+  .red{
+    color: #f00
+  }
 </style>
