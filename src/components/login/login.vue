@@ -67,7 +67,7 @@ export default{
       }
     },
     checkPwd () {
-      if (this.loginData.password.length < 8) {
+      if (this.loginData.password.length < 6) {
         this.isRightPwd = true
       }
     }
