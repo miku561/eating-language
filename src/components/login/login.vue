@@ -6,12 +6,12 @@
     <div class="form-part">
       <div class="form-group">
         <i class="icon icon-user"></i>
-        <input type="text" placeholder="用户名" @blur="checkInp" v-model="loginData.username" @focus="clearInp('isRightUser')">
+        <input type="text" placeholder="用户名" class="form-inp" @blur="checkInp" v-model="loginData.username" @focus="clearInp('isRightUser')">
         <span v-if="isRightUser" class="red">请输入正确的用户名</span>
       </div>
       <div class="form-group">
         <i class="icon icon-pwd"></i>
-        <input type="password" placeholder="password" @blur="checkPwd" v-model="loginData.password" @focus="clearInp('isRightPwd')">
+        <input type="password" class="form-inp" placeholder="password" @blur="checkPwd" v-model="loginData.password" @focus="clearInp('isRightPwd')">
         <span v-if="isRightPwd" class="red">请输入正确的密码</span>
       </div>
       <div class="form-group">
@@ -76,7 +76,52 @@ export default{
 </script>
 
 <style scoped lang="scss">
-  .red{
-    color: #f00
+  .login{
+    height: 100%;
+    background: #39c5bb;
+    color: #fff;
+    text-align: center;
+    .logo-wrap{
+     padding: 100px 0;
+    }
+    .form-part{
+      margin: 0 auto;
+      width: 60%;
+      .form-group{
+        position: relative;
+        .form-inp{
+          appearance: none;
+          border: none;
+          width: 100%;
+          height: 50px;
+          background: transparent;
+          outline: none;
+          border-bottom: 1px solid #fff;
+          &::-webkit-input-placeholder{
+            color: #fff
+          }
+        }
+        .red{
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: #f00;
+          font-size:12px;
+          background: #fff;
+          &::before{
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 5px;
+            border-top: 5px solid #fff;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 0; 
+          }
+        }
+      }
+    }
   }
 </style>
