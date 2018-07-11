@@ -25,8 +25,13 @@ const delCookie = (value) => {
     document.cookie = value + '=' + cval + ';expires=' + exp.toGMTString()
   }
 }
+
+const showToast = (title, time = 3000) => {
+}
+
 module.exports = {
   setCookie,
   getCookie,
-  delCookie
+  delCookie,
+  showToast
 }

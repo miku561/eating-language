@@ -49,6 +49,7 @@ export default{
           password: that.loginData.password
         }
       }).then((res) => {
+        console.log(res)
         if (JSON.parse(res.data.success)) {
           util.setCookie('username', this.loginData.username, 7)
           util.setCookie('password', this.loginData.password, 7)
@@ -96,6 +97,7 @@ export default{
           height: 50px;
           background: transparent;
           outline: none;
+          color: #fff;
           border-bottom: 1px solid #fff;
           &::-webkit-input-placeholder{
             color: #fff
@@ -103,8 +105,8 @@ export default{
         }
         .red{
           position: absolute;
-          top: -10px;
-          right: -10px;
+          top: -15px;
+          left: 2px;
           padding: 5px 10px;
           border-radius: 5px;
           color: #f00;
@@ -118,8 +120,20 @@ export default{
             border-top: 5px solid #fff;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-bottom: 0; 
+            border-bottom: 0;
           }
+        }
+        .submit-btn{
+          margin: 30px 0;
+          border-radius: 5px;
+          width: 100%;
+          height: 40px;
+          outline: none;
+          border: none;
+          background: #fff;
+        }
+        .forget-pwd{
+          margin-left: 15px;
         }
       }
     }
